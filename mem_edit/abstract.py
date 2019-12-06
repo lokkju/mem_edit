@@ -293,7 +293,7 @@ class Process(metaclass=ABCMeta):
                 region_buffer = (ctypes.c_byte * (stop - start))()
                 self.read_memory(start, region_buffer)
                 found += [offset + start for offset in search(needle_buffer, region_buffer)]
-            except OSError:
+            except OSError,ValueError:
                 logger.error('Failed to read in range  0x{} - 0x{}'.format(start, stop))
         return found
 
